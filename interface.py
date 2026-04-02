@@ -2,26 +2,36 @@ import tkinter as tk
 from tkinter import messagebox
 
 def dire_bonjour():
-    nom = entree_nom.get() # On récupère le texte écrit dans la case
+    nom = entree_nom.get()
     if nom:
-        messagebox.showinfo("Message", f"Bonjour {nom} ! Bienvenue dans ton premier logiciel.")
+        label_bienvenue.config(text=f"Salut {nom} !", fg="#00FF00") # Vert fluo
     else:
-        messagebox.showwarning("Attention", "Tu as oublié de taper ton nom !")
+        messagebox.showwarning("Erreur", "Le champ est vide !")
 
-# 1. Création de la fenêtre principale
+# Configuration de la fenêtre principale
 fenetre = tk.Tk()
-fenetre.title("Mon Premier Logiciel")
-fenetre.geometry("300x200") # Largeur x Hauteur
+fenetre.title("Logiciel Pro")
+fenetre.geometry("400x300")
+fenetre.configure(bg="#2C3E50") # Bleu nuit sombre
 
-# 2. Ajout des éléments (Widgets)
-label_instruction = tk.Label(fenetre, text="Entre ton nom ci-dessous :", pady=10)
-label_instruction.pack()
+# Titre stylisé
+tk.Label(fenetre, text="IDENTIFICATION", font=("Arial", 16, "bold"), 
+         bg="#2C3E50", fg="white", pady=20).pack()
 
-entree_nom = tk.Entry(fenetre) # La zone de texte
-entree_nom.pack(pady=5)
+# Zone de saisie (Entry) avec couleurs sombres
+entree_nom = tk.Entry(fenetre, font=("Arial", 14), bg="#34495E", fg="white", 
+                      insertbackground="white", borderwidth=0)
+entree_nom.pack(pady=10)
 
-bouton_valider = tk.Button(fenetre, text="Valider", command=dire_bonjour, bg="lightblue")
+# Bouton avec design "Flat"
+bouton_valider = tk.Button(fenetre, text="ACCÉDER", command=dire_bonjour, 
+                           bg="#E74C3C", fg="white", font=("Arial", 10, "bold"),
+                           padx=20, pady=10, activebackground="#C0392B", 
+                           activeforeground="white", cursor="hand2")
 bouton_valider.pack(pady=20)
 
-# 3. Lancement de l'interface
+# Label pour le résultat
+label_bienvenue = tk.Label(fenetre, text="", font=("Arial", 12), bg="#2C3E50", fg="white")
+label_bienvenue.pack()
+
 fenetre.mainloop()
